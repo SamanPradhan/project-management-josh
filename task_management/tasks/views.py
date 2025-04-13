@@ -5,7 +5,6 @@ from .models import CustomUser, Task
 from .serializers import CustomUserSerializer, TaskSerializer
 from django.shortcuts import get_object_or_404
 
-# ---------- CUSTOM USER VIEWS ----------
 
 @api_view(['GET', 'POST'])
 def user_list(request):
@@ -44,7 +43,6 @@ def user_detail(request, pk):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# ---------- TASK VIEWS ----------
 
 @api_view(['GET', 'POST'])
 def task_list(request):
@@ -83,6 +81,7 @@ def task_detail(request, pk):
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 @api_view(['GET'])
 def tasks_assigned_to_user(request, user_id):
     """
@@ -91,3 +90,21 @@ def tasks_assigned_to_user(request, user_id):
     tasks = Task.objects.filter(assigned_to=user_id)
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
+
+
+@api_view(['PATCH'])
+def assign_assignees_to_task(request, pk):
+    """
+    Assign new assignees to a task.
+    """
+    task = get_object_or_404(Task, pk=pk)
+    assignees_data = request.data.get('assigned_to', [])
+    
+    if assignees_data:
+        assignees = CustomUser.objects.filter(id__in=assignees_data)
+        task.assigned_to.set(assignees)
+        task.save()
+        serializer = TaskSerializer(task)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({"error": "No assignees provided."}, status=status.HTTP_400_BAD_REQUEST)

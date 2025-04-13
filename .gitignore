@@ -1,2 +1,60 @@
-.env
+
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies
+/node_modules/
+
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
 venv/
+
+# Java compiled files
+*.class
+
+# JetBrains IDEs
+.idea/
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# Dependency directories
+/pnpm-lock.yaml
+/package-lock.json
+/yarn.lock
+
+# .env files for sensitive data
+.env
+
+# macOS Finder settings
+.fseventsd
+.TemporaryItems
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Eclipse IDE
+.project
+.classpath
+.csettings/
+
+# IntelliJ IDEA
+.idea/
+
+# JetBrains IDEs (CLion, etc.)
+.idea/
+
+# Vim swap files
+*.swp
+
+# Emacs backup files

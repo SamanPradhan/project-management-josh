@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
 
     # Use email as the unique identifier for authentication
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'name']  # username remains required for now
+    REQUIRED_FIELDS = ['username', 'name']
 
     def __str__(self):
         return self.email
