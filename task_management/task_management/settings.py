@@ -82,7 +82,6 @@ WSGI_APPLICATION = 'task_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-print("-----------", env('DATABASE_NAME'),)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
